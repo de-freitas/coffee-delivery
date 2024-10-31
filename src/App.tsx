@@ -1,10 +1,14 @@
 import "./App.css";
+import { Header } from "./components/Header";
+import { MainSection } from "./pages/main-section";
 
 function App() {
   return (
     <>
-      <h1 className="font-bold underline">Hello world!</h1>
-      <h1 className="font-bold underline">Hello world!</h1>
+      <body className="max-w-1440 mx-auto px-40 bg-background">
+        <Header />
+        <MainSection />
+      </body>
     </>
   );
 }

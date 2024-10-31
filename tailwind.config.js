@@ -25,7 +25,13 @@ export default {
       },
       fontFamily: {
         baloo: ['"Baloo 2"', "cursive"],
-        roboto: ["Roboto", "sans-serif"],
+        roboto: ["Roboto", "Roboto-mono"],
+      },
+      maxWidth: {
+        1440: "90rem",
+      },
+      width: {
+        1440: "90rem",
       },
     },
   },
