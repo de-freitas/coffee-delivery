@@ -1,10 +1,10 @@
-import logo from "/public/logo.svg";
+import logo from "/src/assets/logo.svg";
 import { MapPin, ShoppingCart } from "@phosphor-icons/react";
 
 export function Header() {
   return (
     <>
-      <div className="flex flex-row justify-between items-center h-[6.5rem]">
+      <div className="flex flex-row justify-between items-center h-[6.5rem] pt-8">
         <div>
           <img src={logo} alt="logo coffee delivery company" />
         </div>

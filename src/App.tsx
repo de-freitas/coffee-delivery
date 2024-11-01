@@ -1,15 +1,17 @@
 import "./App.css";
 import { Header } from "./components/Header";
 import { MainSection } from "./pages/main-section";
+import { OurCoffees } from "./pages/our-coffees";
 
 function App() {
   return (
-    <>
-      <body className="max-w-1440 mx-auto px-40 bg-background">
+    <body className="bg-background">
+      <section className="max-w-1440 mx-auto px-40">
         <Header />
         <MainSection />
-      </body>
-    </>
+        <OurCoffees />
+      </section>
+    </body>
   );
 }
 
