@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { SelectedCoffees } from "./selected-coffees";
 
 export function ConfirmOrder() {
@@ -26,9 +27,11 @@ export function ConfirmOrder() {
               </div>
             </div>
 
-            <button className="bg-yellow text-white text-center p-4 rounded-lg font-bold w-full opacity-90 hover:opacity-100">
-              CONFIRMAR PEDIDO
-            </button>
+            <Link to="/success">
+              <button className="bg-yellow text-white text-center p-4 rounded-lg font-bold w-full opacity-90 hover:opacity-100">
+                CONFIRMAR PEDIDO
+              </button>
+            </Link>
           </div>
         </div>
       </aside>

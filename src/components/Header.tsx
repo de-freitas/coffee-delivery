@@ -6,9 +6,11 @@ export function Header() {
   return (
     <>
       <div className="flex flex-row justify-between items-center h-[6.5rem] pt-8">
-        <div>
-          <img src={logo} alt="logo coffee delivery company" />
-        </div>
+        <Link to="/">
+          <div>
+            <img src={logo} alt="logo coffee delivery company" />
+          </div>
+        </Link>
         <div className="flex w-[12.0265rem] items-center h-[2.375rem] justify-between gap-3">
           <div className="flex items-center justify-evenly rounded-md h-full w-full p bg-purple-light px-1 ">
             <div className="text-purple">

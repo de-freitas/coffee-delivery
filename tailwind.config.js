@@ -40,6 +40,9 @@ export default {
       borderWidth: {
         "1px": "1px",
       },
+      borderRadius: {
+        "3rem": "3rem",
+      },
     },
   },
   plugins: [],

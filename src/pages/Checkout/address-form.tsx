@@ -1,6 +1,6 @@
 import { MapPinLine } from "@phosphor-icons/react";
 
-export function AdressForm() {
+export function AddressForm() {
   return (
     <>
       <section className="flex flex-col gap-3">
@@ -26,43 +26,48 @@ export function AdressForm() {
           <div className="my-auto">
             <form className="grid grid-cols-3 gap-4 font-thin text-base-text text-sm justify-between ">
               <input
-                className="bg-base-input row-span-3 h-11 p-2 rounded-md outline-none"
+                className="bg-base-input row-span-3 h-11 p-2 rounded-md outline-yellow outline-input"
                 type="text"
                 name="cep"
                 placeholder="CEP"
               />
               <input
-                className="bg-base-input col-span-3 h-11 p-2 rounded-md outline-none"
+                className="bg-base-input col-span-3 h-11 p-2 rounded-md outline-yellow outline-input"
                 type="text"
                 name="rua"
                 placeholder="Rua"
               />
               <input
-                className="bg-base-input col-span-1 h-11 p-2 rounded-md outline-none"
+                className="bg-base-input col-span-1 h-11 p-2 rounded-md outline-yellow outline-input"
                 type="number"
                 name="numero"
                 placeholder="Número"
               />
+              <div className="bg-base-input col-span-2 rounded-md h-11 w-full">
+                <input
+                  className="bg-base-input p-2 h-11 outline-yellow outline-input w-full pr-16"
+                  type="text"
+                  name="complemento"
+                  placeholder="Complemento"
+                />
+                <span className="font-thin text-base-text text-xs italic relative top-[-70%] right-[-85%] ">
+                  Opcional
+                </span>
+              </div>
               <input
-                className="bg-base-input col-span-2 h-11 p-2 rounded-md outline-none"
-                type="text"
-                name="complemento"
-                placeholder="Complemento"
-              />
-              <input
-                className="bg-base-input h-11 p-2 rounded-md outline-none"
+                className="bg-base-input h-11 p-2 rounded-md outline-yellow outline-input"
                 type="text"
                 name="bairro"
                 placeholder="Bairro"
               />
               <input
-                className="bg-base-input w-[165%] h-11 p-2 rounded-md outline-none"
+                className="bg-base-input w-[165%] h-11 p-2 rounded-md outline-yellow outline-input"
                 type="text"
                 name="cidade"
                 placeholder="Cidade"
               />
               <input
-                className="bg-base-input w-[calc(35%)] ml-auto h-11 p-2 rounded-md outline-none"
+                className="bg-base-input w-[calc(35%)] ml-auto h-11 p-2 rounded-md outline-yellow outline-input"
                 type="text"
                 name="uf"
                 placeholder="UF"
