@@ -1,18 +1,10 @@
 import "./App.css";
-import { Header } from "./components/Header";
-import { MainSection } from "./pages/main-section";
-import { OurCoffees } from "./pages/our-coffees";
+
+import { RouterProvider } from "react-router-dom";
+import { router } from "./components/Router";
 
 function App() {
-  return (
-    <body className="bg-background">
-      <section className="max-w-1440 mx-auto px-40">
-        <Header />
-        <MainSection />
-        <OurCoffees />
-      </section>
-    </body>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

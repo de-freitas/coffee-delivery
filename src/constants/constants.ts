@@ -126,3 +126,18 @@ export const COFFEES_IMAGES = [
     price: "9,90",
   },
 ];
+
+export const SELECTED_COFFEES = [
+  {
+    name: "Expresso Tradicional",
+    img: img_expresso_tradicional,
+    amount: "1",
+    price: "9,90",
+  },
+  {
+    name: "Irlandês",
+    img: img_irlandes,
+    amount: "1",
+    price: "9,90",
+  },
+];

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "/src/assets/logo.svg";
 import { MapPin, ShoppingCart } from "@phosphor-icons/react";
 
@@ -18,12 +19,14 @@ export function Header() {
             </div>
           </div>
           <div className="bg-yellow-light w-14 h-full flex rounded-md">
-            <ShoppingCart
-              size={22}
-              weight="fill"
-              color="#c47f17"
-              className="m-auto"
-            />
+            <Link to="/checkout" className="flex m-auto">
+              <ShoppingCart
+                size={22}
+                weight="fill"
+                color="#c47f17"
+                className="m-auto"
+              />
+            </Link>
           </div>
         </div>
       </div>

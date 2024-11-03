@@ -33,6 +33,13 @@ export default {
       width: {
         1440: "90rem",
       },
+      height: {
+        31.125: "31.125rem",
+        "1px": "1px",
+      },
+      borderWidth: {
+        "1px": "1px",
+      },
     },
   },
   plugins: [],
