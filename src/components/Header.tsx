@@ -20,7 +20,7 @@ export function Header() {
               Porto Alegre, RS
             </div>
           </div>
-          <div className="bg-yellow-light w-14 h-full flex rounded-md">
+          <div className="bg-yellow-light w-14 h-full flex rounded-md hover:bg-yellow">
             <Link to="/checkout" className="flex m-auto">
               <ShoppingCart
                 size={22}

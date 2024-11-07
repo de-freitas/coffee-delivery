@@ -10,7 +10,7 @@ export function OurCoffees() {
         </h2>
       </div>
 
-      <div className="grid grid-cols-4 gap-y-10 gap-x-8 mx-auto ">
+      <div className="grid grid-cols-4 gap-y-10 gap-x-8 mx-auto">
         {COFFEES_IMAGES &&
           COFFEES_IMAGES.length > 0 &&
           COFFEES_IMAGES.map((coffee) => {

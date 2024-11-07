@@ -1,5 +1,3 @@
-import { Header } from "../../components/Header";
-
 import delivery from "../../assets/delivery.png";
 import { CurrencyDollar, MapPin, Timer } from "@phosphor-icons/react";
 
@@ -7,8 +5,6 @@ export function SuccessPage() {
   return (
     <>
       <div className="max-w-1440 mx-auto px-40">
-        <Header />
-
         <div className="pt-24 ">
           <div className="flex flex-col pb-10">
             <h1 className="font-baloo font-bold text-3xl text-yellow-dark">
