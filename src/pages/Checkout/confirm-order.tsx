@@ -1,7 +1,24 @@
 import { Link } from "react-router-dom";
 import { SelectedCoffees } from "./selected-coffees";
+import { useContext } from "react";
+import { CoffeesContext } from "../../contexts/CoffeesContext";
+import { formatPriceToPtBR } from "../../utils/formatPriceToPtBR";
 
 export function ConfirmOrder() {
+  const { selectedCoffees } = useContext(CoffeesContext);
+
+  const totalCoffeesPrice = selectedCoffees.reduce((total, coffee) => {
+    return total + coffee.price * coffee.quantity;
+  }, 0);
+  const taxes = 3.5;
+  const totalCoffeesPlusTaxes = totalCoffeesPrice + taxes;
+
+  const formatedTaxes = formatPriceToPtBR(taxes);
+  const formatedTotalCoffeesPrice = formatPriceToPtBR(totalCoffeesPrice);
+  const formatedTotalCoffeesPricePlusTaxes = formatPriceToPtBR(
+    totalCoffeesPlusTaxes
+  );
+
   return (
     <>
       <aside className="pt-10">
@@ -9,30 +26,32 @@ export function ConfirmOrder() {
           <div>
             <SelectedCoffees />
           </div>
-          <div className="flex flex-col gap-6">
-            <div className="flex flex-col gap-4">
-              <div className="flex justify-between">
-                <div>Total de itens</div>
-                <div>R$ 29,70</div>
+          {totalCoffeesPrice > 0 && (
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-4">
+                <div className="flex justify-between">
+                  <div>Total de itens</div>
+                  <div>R$ {formatedTotalCoffeesPrice}</div>
+                </div>
+
+                <div className="flex justify-between">
+                  <div>Entrega</div>
+                  <div>R$ {formatedTaxes}</div>
+                </div>
+
+                <div className="flex justify-between">
+                  <div>Total</div>
+                  <div>R$ {formatedTotalCoffeesPricePlusTaxes}</div>
+                </div>
               </div>
 
-              <div className="flex justify-between">
-                <div>Entrega</div>
-                <div>R$ 3,50</div>
-              </div>
-
-              <div className="flex justify-between">
-                <div>Total</div>
-                <div>R$ 33,20</div>
-              </div>
+              <Link to="/success">
+                <button className="bg-yellow text-white text-center p-4 rounded-lg font-bold w-full opacity-90 hover:opacity-100">
+                  CONFIRMAR PEDIDO
+                </button>
+              </Link>
             </div>
-
-            <Link to="/success">
-              <button className="bg-yellow text-white text-center p-4 rounded-lg font-bold w-full opacity-90 hover:opacity-100">
-                CONFIRMAR PEDIDO
-              </button>
-            </Link>
-          </div>
+          )}
         </div>
       </aside>
     </>

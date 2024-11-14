@@ -1,6 +1,49 @@
 import { MapPinLine } from "@phosphor-icons/react";
+import { zipCodeMask } from "../../utils/zipCodeMask";
+import { useEffect, useState } from "react";
 
 export function AddressForm() {
+  const [cep, setCep] = useState("");
+  const [street, setStreet] = useState("");
+  const [neighborhood, setNeighborhood] = useState("");
+  const [number, setNumber] = useState("");
+  const [complement, SetComplement] = useState("");
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
+  //let form = { street, neighborhood, number, complement, state, city };
+
+  async function getInformationByCep(cep: string) {
+    cep = cep.replace("-", "");
+
+    if (cep.length === 8) {
+      try {
+        const response = await fetch(
+          `https://brasilapi.com.br/api/cep/v1/${cep}`
+        );
+        const data = await response.json();
+        setStreet(data.street);
+        setState(data.state);
+        setCity(data.city);
+      } catch (error) {
+        throw new Error(`Error fetching brasilapi.com.br, ${error}`);
+      }
+    }
+  }
+
+  function handleZipCode(value: string) {
+    const typedValue = zipCodeMask(value);
+    setCep(typedValue);
+  }
+
+  useEffect(() => {
+    console.log(cep);
+    if (cep.length === 9) {
+      const data = getInformationByCep(cep);
+
+      console.log(data);
+    }
+  }, [cep]);
+
   return (
     <>
       <section className="flex flex-col gap-3">
@@ -29,19 +72,26 @@ export function AddressForm() {
                 className="bg-base-input row-span-3 h-11 p-2 rounded-md outline-yellow outline-input"
                 type="text"
                 name="cep"
+                maxLength={9}
                 placeholder="CEP"
+                value={cep}
+                onChange={(event) => handleZipCode(event.target.value)}
               />
               <input
                 className="bg-base-input col-span-3 h-11 p-2 rounded-md outline-yellow outline-input"
                 type="text"
                 name="rua"
                 placeholder="Rua"
+                value={street}
+                onChange={(event) => setStreet(event.target.value)}
               />
               <input
                 className="bg-base-input col-span-1 h-11 p-2 rounded-md outline-yellow outline-input"
                 type="number"
                 name="numero"
                 placeholder="Número"
+                value={number}
+                onChange={(event) => setNumber(event.target.value)}
               />
               <div className="bg-base-input col-span-2 rounded-md h-11 w-full">
                 <input
@@ -49,6 +99,8 @@ export function AddressForm() {
                   type="text"
                   name="complemento"
                   placeholder="Complemento"
+                  value={complement}
+                  onChange={(event) => SetComplement(event.target.value)}
                 />
                 <span className="font-thin text-base-text text-xs italic relative top-[-70%] right-[-85%] ">
                   Opcional
@@ -59,18 +111,24 @@ export function AddressForm() {
                 type="text"
                 name="bairro"
                 placeholder="Bairro"
+                value={neighborhood}
+                onChange={(event) => setNeighborhood(event.target.value)}
               />
               <input
                 className="bg-base-input w-[165%] h-11 p-2 rounded-md outline-yellow outline-input"
                 type="text"
                 name="cidade"
                 placeholder="Cidade"
+                value={city}
+                onChange={(event) => setCity(event.target.value)}
               />
               <input
                 className="bg-base-input w-[calc(35%)] ml-auto h-11 p-2 rounded-md outline-yellow outline-input"
                 type="text"
                 name="uf"
                 placeholder="UF"
+                value={state}
+                onChange={(event) => setState(event.target.value)}
               />
             </form>
           </div>
