@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "/src/assets/logo.svg";
+import logo from "../assets/Logo.svg";
 import { MapPin, ShoppingCart } from "@phosphor-icons/react";
 import { useContext } from "react";
 import { CoffeesContext } from "../contexts/CoffeesContext";
