@@ -1,7 +1,10 @@
-import { COFFEES_IMAGES } from "../../constants/constants";
 import { CoffeeCard } from "../../components/CoffeeCard";
+import { useContext } from "react";
+import { CoffeesContext } from "../../contexts/CoffeesContext";
 
 export function OurCoffees() {
+  const { coffees } = useContext(CoffeesContext);
+
   return (
     <section className=" flex flex-col">
       <div className="pb-12">
@@ -11,9 +14,8 @@ export function OurCoffees() {
       </div>
 
       <div className="grid grid-cols-4 gap-y-10 gap-x-8 mx-auto">
-        {COFFEES_IMAGES &&
-          COFFEES_IMAGES.length > 0 &&
-          COFFEES_IMAGES.map((coffee) => {
+        {coffees.length > 0 &&
+          coffees.map((coffee) => {
             return (
               <div key={coffee.name}>
                 <CoffeeCard
@@ -22,6 +24,7 @@ export function OurCoffees() {
                   types={coffee.types}
                   desc={coffee.desc}
                   price={coffee.price}
+                  quantity={coffee.quantity}
                 />
               </div>
             );

@@ -1,7 +1,7 @@
 import { Minus, Plus, ShoppingCartSimple } from "@phosphor-icons/react";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Coffee, CoffeesContext } from "../contexts/CoffeesContext";
+import { CoffeesContext } from "../contexts/CoffeesContext";
 import { formatPriceToPtBR } from "../utils/formatPriceToPtBR";
 
 interface CoffeeCardProps {
@@ -21,21 +21,10 @@ export function CoffeeCard({
   price,
   quantity,
 }: CoffeeCardProps) {
-  const [amountOfEachCoffee, setAmountOfEachCoffee] = useState(0);
-  const selectedCoffee = { name, img, price, quantity };
+  const selectedCoffee = { name, img, types, desc, price, quantity };
 
-  const { manageAmount, OperationTypes } = useContext(CoffeesContext);
+  const { manageQuantity, OperationTypes } = useContext(CoffeesContext);
 
-  function increaseAmountOfEachCoffee(selectedCoffee: Coffee) {
-    setAmountOfEachCoffee((state) => state + 1);
-    manageAmount(selectedCoffee, OperationTypes.ADD_COFFEE);
-  }
-
-  function decreaseAmountOfEachCoffee(selectedCoffee: Coffee) {
-    if (amountOfEachCoffee === 0) return;
-    setAmountOfEachCoffee((state) => (state < 1 ? 1 : state - 1));
-    manageAmount(selectedCoffee, OperationTypes.REMOVE_COFFEE);
-  }
   return (
     <div className=" w-64 h-80 hover:p-[1px] bg-gradient-to-r from-yellow to-purple flex rounded-md rounded-tr-[3rem] rounded-bl-[3rem]">
       <div className="bg-base-card flex flex-col items-center text-center gap-6 rounded-md rounded-tr-[3rem] rounded-bl-[3rem] h-full">
@@ -76,20 +65,28 @@ export function CoffeeCard({
             <div className="bg-base-button flex gap-3 items-center p-2 rounded-lg">
               <button
                 className="text-purple-dark "
-                onClick={() => decreaseAmountOfEachCoffee(selectedCoffee)}
+                onClick={() =>
+                  manageQuantity(
+                    selectedCoffee,
+                    OperationTypes.DECREASE_QUANTITY
+                  )
+                }
               >
                 <Minus size={16} />
               </button>
-              {amountOfEachCoffee === 0 ? (
+              {quantity === 0 ? (
                 <span className="opacity-40">1</span>
               ) : (
-                <span className="opacity-100 font-bold">
-                  {amountOfEachCoffee}
-                </span>
+                <span className="opacity-100 font-bold">{quantity}</span>
               )}
               <button
                 className="text-purple-dark"
-                onClick={() => increaseAmountOfEachCoffee(selectedCoffee)}
+                onClick={() =>
+                  manageQuantity(
+                    selectedCoffee,
+                    OperationTypes.INCREASE_QUANTITY
+                  )
+                }
               >
                 <Plus size={16} />
               </button>

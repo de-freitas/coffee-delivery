@@ -1,6 +1,7 @@
 import { MapPinLine } from "@phosphor-icons/react";
 import { zipCodeMask } from "../../utils/zipCodeMask";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { CoffeesContext } from "../../contexts/CoffeesContext";
 
 export function AddressForm() {
   const [cep, setCep] = useState("");
@@ -11,6 +12,8 @@ export function AddressForm() {
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   //let form = { street, neighborhood, number, complement, state, city };
+
+  const { updateLocation } = useContext(CoffeesContext);
 
   async function getInformationByCep(cep: string) {
     cep = cep.replace("-", "");
@@ -24,6 +27,7 @@ export function AddressForm() {
         setStreet(data.street);
         setState(data.state);
         setCity(data.city);
+        updateLocation(`${data.city}, ${data.state}`);
       } catch (error) {
         throw new Error(`Error fetching brasilapi.com.br, ${error}`);
       }
@@ -78,7 +82,7 @@ export function AddressForm() {
                 onChange={(event) => handleZipCode(event.target.value)}
               />
               <input
-                className="bg-base-input col-span-3 h-11 p-2 rounded-md outline-yellow outline-input"
+                className="bg-base-input col-span-3 h-11 p-2 rounded-md outline-input"
                 type="text"
                 name="rua"
                 placeholder="Rua"
@@ -95,7 +99,7 @@ export function AddressForm() {
               />
               <div className="bg-base-input col-span-2 rounded-md h-11 w-full">
                 <input
-                  className="bg-base-input p-2 h-11 outline-yellow outline-input w-full pr-16"
+                  className="bg-base-input p-2 h-11 outline-yellow rounded-md outline-input w-full pr-16"
                   type="text"
                   name="complemento"
                   placeholder="Complemento"

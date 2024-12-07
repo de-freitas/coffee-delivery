@@ -5,9 +5,9 @@ import { CoffeesContext } from "../../contexts/CoffeesContext";
 import { formatPriceToPtBR } from "../../utils/formatPriceToPtBR";
 
 export function ConfirmOrder() {
-  const { selectedCoffees } = useContext(CoffeesContext);
+  const { coffees } = useContext(CoffeesContext);
 
-  const totalCoffeesPrice = selectedCoffees.reduce((total, coffee) => {
+  const totalCoffeesPrice = coffees.reduce((total, coffee) => {
     return total + coffee.price * coffee.quantity;
   }, 0);
   const taxes = 3.5;

@@ -13,13 +13,14 @@ import img_havaiano from "../assets/Type=Havaiano.svg";
 import img_arabe from "../assets/Type=Arabe.svg";
 import img_irlandes from "../assets/Type=Irlandês.svg";
 
-export const COFFEES_IMAGES = [
+export const COFFEES = [
   {
     name: "Expresso Tradicional",
     img: img_expresso_tradicional,
     types: ["TRADICIONAL"],
     desc: "O tradicional café feito com água quente e grãos moídos",
     price: 9.9,
+    quantity: 0,
   },
 
   {
@@ -28,6 +29,7 @@ export const COFFEES_IMAGES = [
     types: ["TRADICIONAL"],
     desc: "Expresso diluído, menos intenso que o tradicional",
     price: 9.9,
+    quantity: 0,
   },
 
   {
@@ -36,6 +38,7 @@ export const COFFEES_IMAGES = [
     types: ["TRADICIONAL"],
     desc: "Café expresso tradicional com espuma cremosa",
     price: 9.9,
+    quantity: 0,
   },
 
   {
@@ -44,6 +47,7 @@ export const COFFEES_IMAGES = [
     types: ["TRADICIONAL", "GELADO"],
     desc: "Bebida preparada com café expresso e cubos de gelo",
     price: 9.9,
+    quantity: 0,
   },
 
   {
@@ -52,6 +56,7 @@ export const COFFEES_IMAGES = [
     types: ["TRADICIONAL", "COM LEITE"],
     desc: "Meio a meio expresso tradicional com leite vaporizado",
     price: 9.9,
+    quantity: 0,
   },
 
   {
@@ -60,6 +65,7 @@ export const COFFEES_IMAGES = [
     types: ["TRADICIONAL", "COM LEITE"],
     desc: "Uma dose de café expresso com o dobro de leite e espuma cremosa",
     price: 9.9,
+    quantity: 0,
   },
 
   {
@@ -68,6 +74,7 @@ export const COFFEES_IMAGES = [
     types: ["TRADICIONAL", "COM LEITE"],
     desc: "Bebida com canela feita de doses iguais de café, leite e espuma",
     price: 9.9,
+    quantity: 0,
   },
 
   {
@@ -76,6 +83,7 @@ export const COFFEES_IMAGES = [
     types: ["TRADICIONAL", "COM LEITE"],
     desc: "Café expresso misturado com um pouco de leite quente e espuma",
     price: 9.9,
+    quantity: 0,
   },
 
   {
@@ -84,6 +92,7 @@ export const COFFEES_IMAGES = [
     types: ["TRADICIONAL", "COM LEITE"],
     desc: "Café expresso com calda de chocolate, pouco de leite e espuma",
     price: 9.9,
+    quantity: 0,
   },
 
   {
@@ -92,6 +101,7 @@ export const COFFEES_IMAGES = [
     types: ["ESPECIAL", "COM LEITE"],
     desc: "Bebida feita com chocolate dissolvido no leite quente e café",
     price: 9.9,
+    quantity: 0,
   },
 
   {
@@ -100,6 +110,7 @@ export const COFFEES_IMAGES = [
     types: ["ESPECIAL", "ALCOÓLICO", "GELADO"],
     desc: "Drink gelado de café expresso com rum, creme de leite e hortelã",
     price: 9.9,
+    quantity: 0,
   },
 
   {
@@ -108,6 +119,7 @@ export const COFFEES_IMAGES = [
     types: ["TRADICIONAL", "COM LEITE"],
     desc: "Uma dose de café expresso com o dobro de leite e espuma cremosa",
     price: 9.9,
+    quantity: 0,
   },
 
   {
@@ -116,6 +128,7 @@ export const COFFEES_IMAGES = [
     types: ["ESPECIAL"],
     desc: "Bebida preparada com grãos de café árabe e especiarias",
     price: 9.9,
+    quantity: 0,
   },
 
   {
@@ -124,6 +137,7 @@ export const COFFEES_IMAGES = [
     types: ["ESPECIAL", "ALCOÓLICO"],
     desc: "Bebida a base de café, uísque irlandês, açúcar e chantilly",
     price: 9.9,
+    quantity: 0,
   },
 ];
 

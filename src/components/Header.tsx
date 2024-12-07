@@ -5,7 +5,8 @@ import { useContext } from "react";
 import { CoffeesContext } from "../contexts/CoffeesContext";
 
 export function Header() {
-  const { amountOfSelectedCoffees } = useContext(CoffeesContext);
+  const { totalQuantityOfSelectedCoffees, location } =
+    useContext(CoffeesContext);
 
   return (
     <>
@@ -21,7 +22,7 @@ export function Header() {
               <MapPin size={22} />
             </div>
             <div className="text-sm font-normal text-purple-dark">
-              Porto Alegre, RS
+              {location}
             </div>
           </div>
           <div className="bg-yellow-light w-14 h-full flex rounded-md hover:bg-yellow">
@@ -33,10 +34,10 @@ export function Header() {
                 className="m-auto"
               />
             </Link>
-            {amountOfSelectedCoffees > 0 ? (
+            {totalQuantityOfSelectedCoffees > 0 ? (
               <div className="bg-red-400">
                 <div className="absolute ml-[-12px] mt-[-10px] bg-yellow-dark font-medium rounded-full w-6 h-6 text-center">
-                  {amountOfSelectedCoffees}
+                  {totalQuantityOfSelectedCoffees}
                 </div>
               </div>
             ) : (
