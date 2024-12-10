@@ -1,13 +1,17 @@
 import { Bank, CreditCard, CurrencyDollar, Money } from "@phosphor-icons/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { CoffeesContext } from "../../contexts/CoffeesContext";
 
 export function PaymentSection() {
+  const { updatePaymentMethod } = useContext(CoffeesContext);
+
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<
     string | null
   >(null);
 
   function handlePaymentSelection(method: string) {
     setSelectedPaymentMethod(method);
+    updatePaymentMethod({ paymentMethod: method });
   }
 
   const isActive = (method: string, object: string) => {
@@ -37,32 +41,35 @@ export function PaymentSection() {
         <div className="font-thin text-xs flex justify-between sm:gap-3 gap-1 text-center">
           <div
             className={`flex sm:flex-row sm:gap-2 flex-col gap-0.5 justify-center items-center w-1/3 rounded-md h-14 sm:pl-4 cursor-pointer ${isActive(
-              "creditCard",
+              "Cartão de Crédito",
               "div"
             )}`}
-            onClick={() => handlePaymentSelection("creditCard")}
+            onClick={() => handlePaymentSelection("Cartão de Crédito")}
           >
-            <CreditCard size={20} color={isActive("creditCard", "icon")} />
+            <CreditCard
+              size={20}
+              color={isActive("Cartão de Crédito", "icon")}
+            />
             <p>CARTÃO DE CRÉDITO</p>
           </div>
           <div
             className={`flex sm:flex-row sm:gap-2 flex-col gap-0.5 justify-center items-center w-1/3 rounded-md h-14 sm:pl-4 cursor-pointer ${isActive(
-              "debitCard",
+              "Cartão de Débito",
               "div"
             )}`}
-            onClick={() => handlePaymentSelection("debitCard")}
+            onClick={() => handlePaymentSelection("Cartão de Débito")}
           >
-            <Bank size={20} color={isActive("debitCard", "icon")} />
+            <Bank size={20} color={isActive("Cartão de Débito", "icon")} />
             <p>CARTÃO DE DÉBITO</p>
           </div>
           <div
             className={`flex sm:flex-row sm:gap-2 flex-col gap-0.5 justify-center items-center w-1/3 rounded-md h-14 sm:pl-4 cursor-pointer ${isActive(
-              "cash",
+              "Dinheiro",
               "div"
             )}`}
-            onClick={() => handlePaymentSelection("cash")}
+            onClick={() => handlePaymentSelection("Dinheiro")}
           >
-            <Money size={20} color={isActive("cash", "icon")} />
+            <Money size={20} color={isActive("Dinheiro", "icon")} />
             <p>DINHEIRO</p>
           </div>
         </div>

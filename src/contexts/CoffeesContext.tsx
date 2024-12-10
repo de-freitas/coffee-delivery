@@ -26,13 +26,33 @@ enum OperationTypes {
   REMOVE_SELECTED_COFFEE = "REMOVE_SELECTED_COFFEE",
 }
 
+interface Address {
+  cep?: string | null;
+  street?: string | null;
+  neighborhood?: string | null;
+  number?: string | null;
+  complement?: string;
+  state?: string | null;
+  city?: string | null;
+}
+
+interface PaymentMethod {
+  paymentMethod: string | null;
+}
+
+interface PaymentData {
+  address: Address;
+  paymentMethod: PaymentMethod;
+}
+
 interface CoffeesContextType {
   coffees: Coffee[];
   manageQuantity: (selected: Coffee, operation: OperationTypes) => void;
   OperationTypes: typeof OperationTypes;
   totalQuantityOfSelectedCoffees: number;
-  location: string;
-  updateLocation: (newLocation: string) => void;
+  paymentData: PaymentData;
+  updatePaymentMethod: (paymentMethod: PaymentMethod) => void;
+  updateAddress: (paymentAddress: Address) => void;
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -48,8 +68,6 @@ interface ActionProps {
 export function CoffeesContexProvider({
   children,
 }: CoffeesContextProviderProps) {
-  //const [coffees, setCoffees] = useState(COFFEES);
-
   const [coffees, dispatch] = useReducer(
     (state: Coffee[], action: ActionProps) => {
       switch (action.type) {
@@ -111,7 +129,19 @@ export function CoffeesContexProvider({
     COFFEES
   );
 
-  const [location, setLocation] = useState("São Paulo, SP");
+  const [paymentData, setPaymentData] = useState<PaymentData>({
+    address: {
+      cep: null,
+      street: null,
+      neighborhood: null,
+      number: null,
+      state: "SP",
+      city: "São Paulo",
+    },
+    paymentMethod: {
+      paymentMethod: null,
+    },
+  });
 
   const totalQuantityOfSelectedCoffees = coffees.reduce(
     (acc, coffee) => acc + coffee.quantity,
@@ -141,7 +171,6 @@ export function CoffeesContexProvider({
           data: selected,
         },
       });
-      //increaseQuantity(selected);
     } else if (operation === OperationTypes.DECREASE_QUANTITY) {
       dispatch({
         type: OperationTypes.DECREASE_QUANTITY,
@@ -149,8 +178,6 @@ export function CoffeesContexProvider({
           data: selected,
         },
       });
-
-      //decreaseQuantity(selected.name);
     } else if (operation === OperationTypes.REMOVE_SELECTED_COFFEE) {
       dispatch({
         type: OperationTypes.REMOVE_SELECTED_COFFEE,
@@ -158,64 +185,20 @@ export function CoffeesContexProvider({
           data: selected,
         },
       });
-      //removeSelectedCoffee(selected.name);
     }
   }
 
-  // function increaseQuantity(coffee: Coffee) {
-  // const coffeeIndex = coffees.findIndex(
-  //   (eachCoffee) => eachCoffee.name === coffee.name
-  // );
-
-  // if (coffeeIndex === -1) {
-  //   return null;
-  // } else {
-  //   return setCoffees((state) =>
-  //     state.map((eachCoffee, index) =>
-  //       coffeeIndex === index
-  //         ? { ...eachCoffee, quantity: eachCoffee.quantity + 1 }
-  //         : eachCoffee
-  //     )
-  //   );
-  // }
-  // }
-
-  // function decreaseQuantity(coffeeName: string) {
-  //   const coffeeIndex = coffees.findIndex(
-  //     (eachCoffee) => coffeeName === eachCoffee.name
-  //   );
-
-  //   if (coffeeIndex === -1) {
-  //     return null;
-  //   } else {
-  //     setCoffees((state) =>
-  //       state.map((eachCoffee, index) =>
-  //         coffeeIndex === index
-  //           ? { ...eachCoffee, quantity: Math.max(0, eachCoffee.quantity - 1) }
-  //           : eachCoffee
-  //       )
-  //     );
-  //   }
-  // }
-
-  // function removeSelectedCoffee(coffeeName: string) {
-  //   const coffeeIndex = coffees.findIndex(
-  //     (eachCoffe) => coffeeName === eachCoffe.name
-  //   );
-
-  //   if (coffeeIndex === -1) {
-  //     return null;
-  //   } else {
-  //     setCoffees((state) =>
-  //       state.map((eachCoffee, index) =>
-  //         coffeeIndex === index ? { ...eachCoffee, quantity: 0 } : eachCoffee
-  //       )
-  //     );
-  //   }
-  // }
-
-  function updateLocation(newLocation: string) {
-    setLocation(() => newLocation);
+  function updatePaymentMethod(paymentMethod: PaymentMethod) {
+    setPaymentData((state) => ({
+      ...state,
+      paymentMethod,
+    }));
+  }
+  function updateAddress(address: Address) {
+    setPaymentData((state) => ({
+      ...state,
+      address,
+    }));
   }
 
   return (
@@ -225,8 +208,9 @@ export function CoffeesContexProvider({
         manageQuantity,
         OperationTypes,
         totalQuantityOfSelectedCoffees,
-        location,
-        updateLocation,
+        paymentData,
+        updatePaymentMethod,
+        updateAddress,
       }}
     >
       {children}

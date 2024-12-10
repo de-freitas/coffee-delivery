@@ -4,8 +4,10 @@ import { useContext } from "react";
 import { CoffeesContext } from "../../contexts/CoffeesContext";
 import { formatPriceToPtBR } from "../../utils/formatPriceToPtBR";
 
+import { useNavigate } from "react-router-dom"; // Importe o hook useNavigate
+
 export function ConfirmOrder() {
-  const { coffees } = useContext(CoffeesContext);
+  const { coffees, paymentData } = useContext(CoffeesContext);
 
   const totalCoffeesPrice = coffees.reduce((total, coffee) => {
     return total + coffee.price * coffee.quantity;
@@ -18,6 +20,24 @@ export function ConfirmOrder() {
   const formatedTotalCoffeesPricePlusTaxes = formatPriceToPtBR(
     totalCoffeesPlusTaxes
   );
+
+  const navigate = useNavigate();
+
+  function handleConfirmOrder() {
+    if (
+      !paymentData.paymentMethod.paymentMethod ||
+      !paymentData.address.cep ||
+      !paymentData.address.city ||
+      !paymentData.address.number ||
+      !paymentData.address.street
+    ) {
+      alert(
+        "Por favor, preencha corretamente os dados de endereço e forma de pagamento!"
+      );
+      return;
+    }
+    return navigate(`/success`);
+  }
 
   return (
     <>
@@ -45,11 +65,17 @@ export function ConfirmOrder() {
                 </div>
               </div>
 
-              <Link to="/success">
+              {/* <Link to="/success">
                 <button className="bg-yellow text-white text-center p-4 rounded-lg font-bold w-full opacity-90 hover:opacity-100">
                   CONFIRMAR PEDIDO
                 </button>
-              </Link>
+              </Link> */}
+              <button
+                onClick={() => handleConfirmOrder()}
+                className="bg-yellow text-white text-center p-4 rounded-lg font-bold w-full opacity-90 hover:opacity-100"
+              >
+                CONFIRMAR PEDIDO
+              </button>
             </div>
           )}
         </div>

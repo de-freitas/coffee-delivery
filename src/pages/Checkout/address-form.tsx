@@ -1,19 +1,20 @@
 import { MapPinLine } from "@phosphor-icons/react";
 import { zipCodeMask } from "../../utils/zipCodeMask";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { CoffeesContext } from "../../contexts/CoffeesContext";
 
 export function AddressForm() {
-  const [cep, setCep] = useState("");
-  const [street, setStreet] = useState("");
-  const [neighborhood, setNeighborhood] = useState("");
-  const [number, setNumber] = useState("");
-  const [complement, SetComplement] = useState("");
-  const [state, setState] = useState("");
-  const [city, setCity] = useState("");
-  //let form = { street, neighborhood, number, complement, state, city };
+  const { updateAddress } = useContext(CoffeesContext);
 
-  const { updateLocation } = useContext(CoffeesContext);
+  const [address, setAddress] = useState({
+    cep: "",
+    street: "",
+    neighborhood: "",
+    number: "",
+    complement: "",
+    state: "",
+    city: "",
+  });
 
   async function getInformationByCep(cep: string) {
     cep = cep.replace("-", "");
@@ -24,29 +25,37 @@ export function AddressForm() {
           `https://brasilapi.com.br/api/cep/v1/${cep}`
         );
         const data = await response.json();
-        setStreet(data.street);
-        setState(data.state);
-        setCity(data.city);
-        updateLocation(`${data.city}, ${data.state}`);
+        setAddress((state) => ({
+          ...state,
+          city: data.city,
+          state: data.state,
+          street: data.street,
+          neighborhood: data.neighborhood,
+        }));
+        console.table(data);
       } catch (error) {
         throw new Error(`Error fetching brasilapi.com.br, ${error}`);
       }
     }
   }
 
-  function handleZipCode(value: string) {
-    const typedValue = zipCodeMask(value);
-    setCep(typedValue);
-  }
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = event.target;
 
-  useEffect(() => {
-    console.log(cep);
-    if (cep.length === 9) {
-      const data = getInformationByCep(cep);
+    const updatedAddress = {
+      ...address,
+      [name]: value,
+    };
+    setAddress(updatedAddress);
+    updateAddress(updatedAddress);
 
-      console.log(data);
+    if (name === "cep") {
+      const cep = zipCodeMask(value);
+      if (cep.length === 9) {
+        getInformationByCep(cep);
+      }
     }
-  }, [cep]);
+  }
 
   return (
     <>
@@ -78,33 +87,36 @@ export function AddressForm() {
                 name="cep"
                 maxLength={9}
                 placeholder="CEP"
-                value={cep}
-                onChange={(event) => handleZipCode(event.target.value)}
+                required
+                value={address.cep}
+                onChange={handleChange}
               />
               <input
                 className="bg-base-input col-span-3 h-11 p-2 rounded-md outline-input"
                 type="text"
-                name="rua"
+                name="street"
                 placeholder="Rua"
-                value={street}
-                onChange={(event) => setStreet(event.target.value)}
+                required
+                value={address.street}
+                onChange={handleChange}
               />
               <input
                 className="bg-base-input col-span-1 h-11 p-2 rounded-md outline-yellow outline-input"
                 type="number"
-                name="numero"
+                name="number"
                 placeholder="Número"
-                value={number}
-                onChange={(event) => setNumber(event.target.value)}
+                required
+                value={address.number}
+                onChange={handleChange}
               />
               <div className="bg-base-input col-span-2 rounded-md h-11 w-full">
                 <input
                   className="bg-base-input p-2 h-11 outline-yellow rounded-md outline-input w-full pr-16"
                   type="text"
-                  name="complemento"
+                  name="complement"
                   placeholder="Complemento"
-                  value={complement}
-                  onChange={(event) => SetComplement(event.target.value)}
+                  value={address.complement}
+                  onChange={handleChange}
                 />
                 <span className="font-thin text-base-text text-xs italic relative top-[-70%] sm:right-[-85%] right-[-75%] ">
                   Opcional
@@ -113,26 +125,29 @@ export function AddressForm() {
               <input
                 className="bg-base-input h-11 p-2 rounded-md outline-yellow outline-input"
                 type="text"
-                name="bairro"
+                name="neighborhood"
                 placeholder="Bairro"
-                value={neighborhood}
-                onChange={(event) => setNeighborhood(event.target.value)}
+                required
+                value={address.neighborhood}
+                onChange={handleChange}
               />
               <input
                 className="bg-base-input w-[165%] h-11 p-2 rounded-md outline-yellow outline-input"
                 type="text"
-                name="cidade"
+                name="city"
                 placeholder="Cidade"
-                value={city}
-                onChange={(event) => setCity(event.target.value)}
+                required
+                value={address.city}
+                onChange={handleChange}
               />
               <input
                 className="bg-base-input w-[calc(35%)] ml-auto h-11 p-2 rounded-md outline-yellow outline-input"
                 type="text"
-                name="uf"
+                name="state"
                 placeholder="UF"
-                value={state}
-                onChange={(event) => setState(event.target.value)}
+                required
+                value={address.state}
+                onChange={handleChange}
               />
             </form>
           </div>

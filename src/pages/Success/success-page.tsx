@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import delivery from "../../assets/delivery.png";
 import { CurrencyDollar, MapPin, Timer } from "@phosphor-icons/react";
+import { CoffeesContext } from "../../contexts/CoffeesContext";
 
 export function SuccessPage() {
+  const { paymentData } = useContext(CoffeesContext);
+
   return (
     <>
       <div className="sm:max-w-1440 mx-auto sm:px-40 px-2">
@@ -29,9 +33,15 @@ export function SuccessPage() {
                   <div className="flex flex-col text-sm font-light">
                     <p>
                       Entrega em{" "}
-                      <strong> Rua João Daniel Martinelli, 102 </strong>
+                      <strong>
+                        {" "}
+                        {paymentData.address.street},{" "}
+                        {paymentData.address.number}{" "}
+                      </strong>
                     </p>
-                    <p>Farrapos - Porto Alegre, RS</p>
+                    <p>
+                      {paymentData.address.city} - {paymentData.address.state}
+                    </p>
                   </div>
                 </div>
                 <div className="flex gap-2 items-center">
@@ -52,7 +62,7 @@ export function SuccessPage() {
                   <div className="flex flex-col text-sm font-light">
                     <p>Pagamento na entrega</p>
                     <p>
-                      <strong>Cartão de Crédito</strong>
+                      <strong>{paymentData.paymentMethod.paymentMethod}</strong>
                     </p>
                   </div>
                 </div>
