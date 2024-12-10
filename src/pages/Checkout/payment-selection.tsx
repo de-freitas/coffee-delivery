@@ -22,7 +22,7 @@ export function PaymentSection() {
 
   return (
     <>
-      <section className="flex flex-col font-roboto bg-background p-8 rounded-md shadow-md gap-7">
+      <section className="flex flex-col font-roboto bg-background sm:p-8 p-2 rounded-md shadow-md gap-7">
         <div className="flex gap-2 items-start">
           <div>
             <CurrencyDollar size={25} color="#4b2995" />{" "}
@@ -34,9 +34,9 @@ export function PaymentSection() {
             </p>
           </div>
         </div>
-        <div className="font-thin text-xs flex justify-between gap-3 text-center">
+        <div className="font-thin text-xs flex justify-between sm:gap-3 gap-1 text-center">
           <div
-            className={`flex gap-2 items-center w-1/3 rounded-md h-14 pl-4 cursor-pointer ${isActive(
+            className={`flex sm:flex-row sm:gap-2 flex-col gap-0.5 justify-center items-center w-1/3 rounded-md h-14 sm:pl-4 cursor-pointer ${isActive(
               "creditCard",
               "div"
             )}`}
@@ -46,7 +46,7 @@ export function PaymentSection() {
             <p>CARTÃO DE CRÉDITO</p>
           </div>
           <div
-            className={`flex gap-2 items-center w-1/3 rounded-md h-14 pl-4 cursor-pointer ${isActive(
+            className={`flex sm:flex-row sm:gap-2 flex-col gap-0.5 justify-center items-center w-1/3 rounded-md h-14 sm:pl-4 cursor-pointer ${isActive(
               "debitCard",
               "div"
             )}`}
@@ -56,7 +56,7 @@ export function PaymentSection() {
             <p>CARTÃO DE DÉBITO</p>
           </div>
           <div
-            className={`flex gap-2 items-center w-1/3 rounded-md h-14 pl-4 cursor-pointer ${isActive(
+            className={`flex sm:flex-row sm:gap-2 flex-col gap-0.5 justify-center items-center w-1/3 rounded-md h-14 sm:pl-4 cursor-pointer ${isActive(
               "cash",
               "div"
             )}`}

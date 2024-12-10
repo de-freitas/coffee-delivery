@@ -21,8 +21,8 @@ export function ConfirmOrder() {
 
   return (
     <>
-      <aside className="pt-10">
-        <div className=" bg-background p-8 rounded-md shadow-md">
+      <aside className="pt-10 w-full">
+        <div className=" bg-background sm:p-8 p-2 rounded-md shadow-md">
           <div>
             <SelectedCoffees />
           </div>

@@ -10,10 +10,15 @@ export function Header() {
 
   return (
     <>
-      <div className="flex flex-row justify-between items-center h-[6.5rem] pt-8">
+      {/* <div className="flex flex-row justify-between items-center h-[6.5rem] pt-8"> */}
+      <div className="flex flex-row justify-between items-center h-[6.5rem] pt-8 w-full">
         <Link to="/">
           <div>
-            <img src={logo} alt="logo coffee delivery company" />
+            <img
+              src={logo}
+              alt="logo coffee delivery company"
+              className="w-28 h-28"
+            />
           </div>
         </Link>
         <div className="flex w-[12.0265rem] items-center h-[2.375rem] justify-between gap-3">

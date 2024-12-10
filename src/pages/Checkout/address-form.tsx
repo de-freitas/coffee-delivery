@@ -55,7 +55,7 @@ export function AddressForm() {
           Complete seu pedido
         </h2>
 
-        <div className="flex flex-col font-roboto bg-background h-96 p-8 rounded-md shadow-md">
+        <div className="flex flex-col font-roboto bg-background h-96 sm:p-8 p-2 rounded-md shadow-md">
           <div className="flex gap-2 items-start">
             <div>
               <MapPinLine size={25} color="#c47f17" />
@@ -71,7 +71,7 @@ export function AddressForm() {
           </div>
 
           <div className="my-auto">
-            <form className="grid grid-cols-3 gap-4 font-thin text-base-text text-sm justify-between ">
+            <form className="grid grid-cols-3 sm:gap-4 gap-y-4 gap-x-1 font-thin text-base-text text-sm justify-between ">
               <input
                 className="bg-base-input row-span-3 h-11 p-2 rounded-md outline-yellow outline-input"
                 type="text"
@@ -106,7 +106,7 @@ export function AddressForm() {
                   value={complement}
                   onChange={(event) => SetComplement(event.target.value)}
                 />
-                <span className="font-thin text-base-text text-xs italic relative top-[-70%] right-[-85%] ">
+                <span className="font-thin text-base-text text-xs italic relative top-[-70%] sm:right-[-85%] right-[-75%] ">
                   Opcional
                 </span>
               </div>
