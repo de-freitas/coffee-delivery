@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { SelectedCoffees } from "./selected-coffees";
 import { useContext } from "react";
 import { CoffeesContext } from "../../contexts/CoffeesContext";
@@ -7,7 +6,14 @@ import { formatPriceToPtBR } from "../../utils/formatPriceToPtBR";
 import { useNavigate } from "react-router-dom"; // Importe o hook useNavigate
 
 export function ConfirmOrder() {
-  const { coffees, paymentData } = useContext(CoffeesContext);
+  const {
+    coffees,
+    paymentData,
+    manageQuantity,
+    OperationTypes,
+    updatePaymentMethod,
+    updateAddress,
+  } = useContext(CoffeesContext);
 
   const totalCoffeesPrice = coffees.reduce((total, coffee) => {
     return total + coffee.price * coffee.quantity;
@@ -36,7 +42,26 @@ export function ConfirmOrder() {
       );
       return;
     }
-    return navigate(`/success`);
+
+    const selectedCoffees = localStorage.getItem(
+      "@coffee-delivery:selectedCoffees"
+    );
+    const parsedSelectedCoffees = selectedCoffees
+      ? JSON.parse(selectedCoffees)
+      : [];
+
+    manageQuantity(parsedSelectedCoffees, OperationTypes.CLEAR);
+
+    navigate(`/success`);
+
+    updatePaymentMethod({ paymentMethod: null });
+    updateAddress({
+      cep: null,
+      complement: null,
+      neighborhood: null,
+      number: null,
+      street: null,
+    });
   }
 
   return (
@@ -65,11 +90,6 @@ export function ConfirmOrder() {
                 </div>
               </div>
 
-              {/* <Link to="/success">
-                <button className="bg-yellow text-white text-center p-4 rounded-lg font-bold w-full opacity-90 hover:opacity-100">
-                  CONFIRMAR PEDIDO
-                </button>
-              </Link> */}
               <button
                 onClick={() => handleConfirmOrder()}
                 className="bg-yellow text-white text-center p-4 rounded-lg font-bold w-full opacity-90 hover:opacity-100"
