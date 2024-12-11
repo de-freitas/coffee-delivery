@@ -1,10 +1,27 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import delivery from "../../assets/delivery.png";
 import { CurrencyDollar, MapPin, Timer } from "@phosphor-icons/react";
 import { CoffeesContext } from "../../contexts/CoffeesContext";
+import { useNavigate } from "react-router-dom";
 
 export function SuccessPage() {
   const { paymentData } = useContext(CoffeesContext);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    // Bloqueia o acesso à página anterior (checkout) no botão voltar
+    window.history.pushState(null, "", window.location.href);
+
+    const handlePopState = () => {
+      navigate("/", { replace: true }); // Redireciona para a Homepage
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [navigate]);
 
   return (
     <>

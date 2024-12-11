@@ -1,10 +1,4 @@
-import {
-  createContext,
-  ReactNode,
-  useEffect,
-  useReducer,
-  useState,
-} from "react";
+import { createContext, ReactNode, useReducer, useState } from "react";
 import { COFFEES } from "../constants/constants";
 
 interface CoffeesContextProviderProps {
@@ -24,6 +18,7 @@ enum OperationTypes {
   INCREASE_QUANTITY = "INCREASE_QUANTITY",
   DECREASE_QUANTITY = "DECREASE_QUANTITY",
   REMOVE_SELECTED_COFFEE = "REMOVE_SELECTED_COFFEE",
+  CLEAR = "CLEAR",
 }
 
 interface Address {
@@ -31,7 +26,7 @@ interface Address {
   street?: string | null;
   neighborhood?: string | null;
   number?: string | null;
-  complement?: string;
+  complement?: string | null;
   state?: string | null;
   city?: string | null;
 }
@@ -68,6 +63,28 @@ interface ActionProps {
 export function CoffeesContexProvider({
   children,
 }: CoffeesContextProviderProps) {
+  function initializeCoffees() {
+    const storadeCoffees = localStorage.getItem(
+      "@coffee-delivery:selectedCoffees"
+    );
+    const parsedCoffees: Coffee[] = storadeCoffees
+      ? JSON.parse(storadeCoffees)
+      : [];
+
+    const mergeQuantity = COFFEES.map((coffeeFromConstants) => {
+      const matchingCoffee = parsedCoffees.find(
+        (storedCoffee) => storedCoffee.name === coffeeFromConstants.name
+      );
+
+      return {
+        ...coffeeFromConstants,
+        quantity: matchingCoffee ? matchingCoffee.quantity : 0,
+      };
+    });
+
+    return mergeQuantity;
+  }
+
   const [coffees, dispatch] = useReducer(
     (state: Coffee[], action: ActionProps) => {
       switch (action.type) {
@@ -79,11 +96,21 @@ export function CoffeesContexProvider({
           if (coffeeIndex === -1) {
             return state;
           } else {
-            return state.map((eachCoffee, index) =>
+            const newState = state.map((eachCoffee, index) =>
               coffeeIndex === index
                 ? { ...eachCoffee, quantity: eachCoffee.quantity + 1 }
                 : eachCoffee
             );
+
+            const filterNotEmpty = newState.filter(
+              (eachCoffee) => eachCoffee.quantity > 0
+            );
+            localStorage.setItem(
+              "@coffee-delivery:selectedCoffees",
+              JSON.stringify(filterNotEmpty)
+            );
+
+            return newState;
           }
         }
 
@@ -94,16 +121,27 @@ export function CoffeesContexProvider({
 
           if (coffeeIndex === -1) {
             return state;
-          } else {
-            return state.map((eachCoffee, index) =>
-              coffeeIndex === index
-                ? {
-                    ...eachCoffee,
-                    quantity: Math.max(0, eachCoffee.quantity - 1),
-                  }
-                : eachCoffee
-            );
           }
+
+          const newState: Coffee[] = state.map((eachCoffee, index) =>
+            coffeeIndex === index
+              ? {
+                  ...eachCoffee,
+                  quantity: Math.max(0, eachCoffee.quantity - 1),
+                }
+              : eachCoffee
+          );
+
+          const filterNotEmpty = newState.filter(
+            (eachCoffee) => eachCoffee.quantity > 0
+          );
+
+          localStorage.setItem(
+            "@coffee-delivery:selectedCoffees",
+            JSON.stringify(filterNotEmpty)
+          );
+
+          return newState;
         }
 
         case OperationTypes.REMOVE_SELECTED_COFFEE: {
@@ -113,20 +151,41 @@ export function CoffeesContexProvider({
 
           if (coffeeIndex === -1) {
             return state;
-          } else {
-            return state.map((eachCoffee, index) =>
-              coffeeIndex === index
-                ? { ...eachCoffee, quantity: 0 }
-                : eachCoffee
-            );
           }
+
+          const newState = state.map((eachCoffee, index) =>
+            coffeeIndex === index ? { ...eachCoffee, quantity: 0 } : eachCoffee
+          );
+
+          const filterNotEmpty = newState.filter(
+            (eachCoffee) => eachCoffee.quantity > 0
+          );
+
+          localStorage.setItem(
+            "@coffee-delivery:selectedCoffees",
+            JSON.stringify(filterNotEmpty)
+          );
+
+          return newState;
+        }
+
+        case OperationTypes.CLEAR: {
+          const newState = state.map((eachCoffee) => ({
+            ...eachCoffee,
+            quantity: 0,
+          }));
+          localStorage.removeItem("@coffee-delivery:selectedCoffees");
+
+          console.log("entrou no Clear");
+          return newState;
         }
 
         default:
           return state;
       }
     },
-    COFFEES
+    [],
+    initializeCoffees
   );
 
   const [paymentData, setPaymentData] = useState<PaymentData>({
@@ -148,21 +207,6 @@ export function CoffeesContexProvider({
     0
   );
 
-  useEffect(() => {
-    const selectedCoffees = coffees.filter(
-      (eachCoffee) => eachCoffee.quantity > 0
-    );
-
-    if (selectedCoffees.length > 0) {
-      localStorage.setItem(
-        "@coffee-delivery:selectedCoffees",
-        JSON.stringify(selectedCoffees)
-      );
-    } else {
-      localStorage.removeItem("@coffee-delivery:selectedCoffees");
-    }
-  }, [coffees]);
-
   function manageQuantity(selected: Coffee, operation: OperationTypes) {
     if (operation === OperationTypes.INCREASE_QUANTITY) {
       dispatch({
@@ -181,6 +225,13 @@ export function CoffeesContexProvider({
     } else if (operation === OperationTypes.REMOVE_SELECTED_COFFEE) {
       dispatch({
         type: OperationTypes.REMOVE_SELECTED_COFFEE,
+        payload: {
+          data: selected,
+        },
+      });
+    } else if (operation === OperationTypes.CLEAR) {
+      dispatch({
+        type: OperationTypes.CLEAR,
         payload: {
           data: selected,
         },
