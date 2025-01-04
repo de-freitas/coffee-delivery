@@ -3,17 +3,11 @@ import { useContext } from "react";
 import { CoffeesContext } from "../../contexts/CoffeesContext";
 import { formatPriceToPtBR } from "../../utils/formatPriceToPtBR";
 
-import { useNavigate } from "react-router-dom"; // Importe o hook useNavigate
+import { useNavigate } from "react-router-dom";
 
 export function ConfirmOrder() {
-  const {
-    coffees,
-    paymentData,
-    manageQuantity,
-    OperationTypes,
-    updatePaymentMethod,
-    updateAddress,
-  } = useContext(CoffeesContext);
+  const { coffees, paymentData, manageQuantity, OperationTypes } =
+    useContext(CoffeesContext);
 
   const totalCoffeesPrice = coffees.reduce((total, coffee) => {
     return total + coffee.price * coffee.quantity;
@@ -53,15 +47,7 @@ export function ConfirmOrder() {
     manageQuantity(parsedSelectedCoffees, OperationTypes.CLEAR);
 
     navigate(`/success`);
-
-    updatePaymentMethod({ paymentMethod: null });
-    updateAddress({
-      cep: null,
-      complement: null,
-      neighborhood: null,
-      number: null,
-      street: null,
-    });
+    window.scroll(0, 0);
   }
 
   return (

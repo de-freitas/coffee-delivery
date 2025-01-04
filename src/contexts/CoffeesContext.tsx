@@ -176,7 +176,6 @@ export function CoffeesContexProvider({
           }));
           localStorage.removeItem("@coffee-delivery:selectedCoffees");
 
-          console.log("entrou no Clear");
           return newState;
         }
 

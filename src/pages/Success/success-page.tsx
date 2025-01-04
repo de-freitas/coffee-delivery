@@ -9,11 +9,10 @@ export function SuccessPage() {
 
   const navigate = useNavigate();
   useEffect(() => {
-    // Bloqueia o acesso à página anterior (checkout) no botão voltar
     window.history.pushState(null, "", window.location.href);
 
     const handlePopState = () => {
-      navigate("/", { replace: true }); // Redireciona para a Homepage
+      navigate("/", { replace: true });
     };
 
     window.addEventListener("popstate", handlePopState);
@@ -86,7 +85,7 @@ export function SuccessPage() {
               </div>
             </div>
 
-            <div className="hidden sm: flex">
+            <div className="hidden sm:flex">
               <img src={delivery} alt="imagem ilustrativa delivery" />
             </div>
           </div>

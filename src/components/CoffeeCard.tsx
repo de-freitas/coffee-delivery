@@ -92,7 +92,7 @@ export function CoffeeCard({
               </button>
             </div>
             <div className="flex h-10 bg-purple-dark rounded-lg p-2 opacity-80 hover:opacity-100">
-              <Link to="/checkout">
+              <Link to="/checkout" onClick={() => window.scroll(0, 0)}>
                 <button>
                   <ShoppingCartSimple size={22} color="white" weight="fill" />
                 </button>
