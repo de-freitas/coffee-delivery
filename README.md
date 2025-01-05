@@ -1,50 +1,27 @@
-# React + TypeScript + Vite
+# **coffee-delivery**!
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### **About:**
 
-Currently, two official plugins are available:
+"coffee-delivery" is a project developed during a [Rocketseat](https://www.rocketseat.com.br/) challenge focused on studying Reactjs. The challenge aimed to put into practice concepts studied. The application was built with Vite using ReactJS with TypeScript and Tailwind. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The project aims to apply studied concepts to manage the shopping cart of a fictional coffee shop. It incorporates concepts such as: States (with Reducer), Context API, LocalStorage, State immutability, Lists and Keys in ReactJS, Props and Componentization.
 
-## Expanding the ESLint configuration
+It was deployed on Vercel, check it out >>> https://coffee-delivery-eight-psi.vercel.app
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+***
+![image](https://github.com/user-attachments/assets/9f1b3056-c561-4d73-ba1d-6578653aea27)
+***
+![image](https://github.com/user-attachments/assets/9eaf2eb2-811b-4a18-a3e4-3a2f8cc45b41)
+***
+![image](https://github.com/user-attachments/assets/573fad94-ba3a-4a01-8fbb-16f26cc51c06)
+***
 
-- Configure the top-level `parserOptions` property like this:
+_____________________________ ![thats all folks](https://github.com/de-freitas/nlw05_podcastr/assets/85907836/a983d6cb-e50f-4eee-9f05-3123ecc2a468) _____________________________
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+***
+_Note:_
+_**my most sincere thanks to the entire Rocketseat team.**_
+_In addition to their courses and subscriptions, they offer a wealth of high-quality materials that are completely free. You can check them out here >> https://biblioteca.rocketseat.com.br/_
