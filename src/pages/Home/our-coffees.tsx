@@ -36,7 +36,7 @@ export function OurCoffees() {
           })}
       </div> */}
 
-      <div className=" md:grid md:grid-cols-4 md:gap-y-10 md:gap-x-8 rounded-sm ">
+      <div className="sm:hidden rounded-sm ">
         <Swiper
           slidesPerView={1.3}
           spaceBetween={1}
@@ -49,6 +49,37 @@ export function OurCoffees() {
           breakpoints={{
             640: { slidesPerView: 2 },
             768: { slidesPerView: 3 },
+            1024: { slidesPerView: 4 },
+          }}
+        >
+          {coffees.map((coffee) => (
+            <div key={coffee.name} className="bg-lime-200">
+              <SwiperSlide key={coffee.name}>
+                <CoffeeCard
+                  img={coffee.img}
+                  name={coffee.name}
+                  types={coffee.types}
+                  desc={coffee.desc}
+                  price={coffee.price}
+                  quantity={coffee.quantity}
+                />
+              </SwiperSlide>
+            </div>
+          ))}
+        </Swiper>
+      </div>
+
+      <div className="hidden sm:flex rounded-sm sm:mx-15">
+        <Swiper
+          slidesPerView={2.5}
+          spaceBetween={33}
+          centeredSlides={false}
+          pagination={{
+            clickable: true,
+          }}
+          modules={[Pagination]}
+          className="mySwiper"
+          breakpoints={{
             1024: { slidesPerView: 4 },
           }}
         >

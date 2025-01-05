@@ -24,7 +24,7 @@ export function SuccessPage() {
 
   return (
     <>
-      <div className="sm:max-w-1440 mx-auto sm:px-40 px-2">
+      <div className="sm:max-w-1440 mx-auto md:px-40 px-2">
         <div className="pt-24 flex flex-col items-center">
           <div className="flex flex-col pb-10">
             <h1 className="font-baloo font-bold text-3xl text-yellow-dark">
@@ -35,12 +35,12 @@ export function SuccessPage() {
             </h2>
           </div>
 
-          <div className="flex">
+          <div className="flex md:hidden">
             <img src={delivery} alt="imagem ilustrativa delivery" />
           </div>
 
-          <div className="flex sm:justify-between">
-            <div className="flex p-[1px] bg-gradient-to-r from-yellow to-purple rounded-md rounded-tr-3rem rounded-bl-3rem sm:w-[48%]">
+          <div className="flex justify-centerw-full">
+            <div className="flex p-[1px] bg-gradient-to-r from-yellow to-purple rounded-md rounded-tr-3rem rounded-bl-3rem w-full max-w-lg md:w-[48%]">
               <div className="flex flex-col justify-around px-10 py-10 gap-5 bg-white rounded-md rounded-tr-3rem rounded-bl-3rem border-none w-[100%]">
                 <div className="flex gap-2 items-center">
                   <div className="w-8 h-8 rounded-full bg-purple flex items-center justify-center">
@@ -85,7 +85,7 @@ export function SuccessPage() {
               </div>
             </div>
 
-            <div className="hidden sm:flex">
+            <div className="hidden md:flex">
               <img src={delivery} alt="imagem ilustrativa delivery" />
             </div>
           </div>

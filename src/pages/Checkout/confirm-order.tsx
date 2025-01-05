@@ -52,9 +52,9 @@ export function ConfirmOrder() {
 
   return (
     <>
-      <aside className="pt-10 w-full">
+      <aside className="pt-10">
         <div className=" bg-background sm:p-8 p-2 rounded-md shadow-md">
-          <div>
+          <div className="flex flex-col">
             <SelectedCoffees />
           </div>
           {totalCoffeesPrice > 0 && (

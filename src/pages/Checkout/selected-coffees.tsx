@@ -19,7 +19,7 @@ export function SelectedCoffees() {
           .filter((coffee) => coffee.quantity > 0)
           .map((coffee, index) => {
             return (
-              <div key={index} className="flex flex-col">
+              <div key={index} className="flex flex-col items-center">
                 <div className="flex gap-5 ">
                   <div className="w-20 h-20">
                     <img src={coffee.img} alt="coffee" />
